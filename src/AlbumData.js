@@ -7,7 +7,7 @@ const getMBIDUrl = (inputValue) => {
 }
 
 const getDataUrl = (mbid) => {
-  return `http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${APIKey}&mbid=${mbid}&format=json`
+  return `https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${APIKey}&mbid=${mbid}&format=json`
 }
 
 const getApiMBID = async (inputValue) => {
