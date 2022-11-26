@@ -1,6 +1,6 @@
 import React from "react"
 import Album from "./Album"
-import { getApiMBID, getAlbumData } from "./AlbumInfo"
+import { getApiMBID, getAlbumData } from "./AlbumData"
 
 const Input = () => {
   const [inputValue, setInputValue] = React.useState("")
@@ -15,7 +15,7 @@ const Input = () => {
     const MBID = await getApiMBID(inputValue)
     const { artist, image, name, tracks } = await getAlbumData(MBID)
 
-    setImageSrc(image[4]["#text"])
+    setImageSrc(image[5]["#text"])
     setAlbumName(name)
     setArtistName(artist)
     setTracks(tracks.track)
@@ -30,7 +30,7 @@ const Input = () => {
           id="input"
           placeholder="album..."
           onChange={(event) =>
-            setInputValue(event.target.value.trim().split(" ").join(" ", "-"))
+            setInputValue(event.target.value.split(" ").join("-").trim())
           }
         />
         <button>Submit</button>

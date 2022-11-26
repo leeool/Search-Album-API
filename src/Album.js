@@ -13,7 +13,7 @@ const Album = ({ imgSrc, albumName, artistName, trackList }) => {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "auto 1fr",
+        gridTemplateColumns: "1fr 1fr",
         gap: "12px"
       }}
     >
@@ -23,9 +23,11 @@ const Album = ({ imgSrc, albumName, artistName, trackList }) => {
         <p className="artist-name">{artistName || "..."}</p>
       </div>
       <div className="container-tracks">
-        <p className="tracks">Tracks</p>
+        <p className="tracks-title">Tracks</p>
         {tracksNames.map((track) => (
-          <li>{track}</li>
+          <li style={{ fontSize: "1.4rem" }} key={track.slice(0, 5)}>
+            {track}
+          </li>
         ))}
       </div>
     </div>

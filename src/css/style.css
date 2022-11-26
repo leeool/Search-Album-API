@@ -10,5 +10,12 @@ body {
   color: white;
 }
 
-@import url(main.css);
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  justify-items: center;
+  align-items: center;
+}
+
+@import url(album.css);
 @import url(input.css);
