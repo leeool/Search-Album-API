@@ -12,3 +12,7 @@
 1. Request with search album name end point
 2. Get MBID from album
 3. Get album info with MBID from another end point
+
+## Demo
+
+![DEMO](https://media.giphy.com/media/YNf2SJSOfKzKu0Mcc5/giphy.gif)
