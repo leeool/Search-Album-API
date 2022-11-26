@@ -1,0 +1,24 @@
+form {
+  display: grid;
+  height: 100vh;
+  justify-content: center;
+  align-content: center;
+  gap: 12px;
+}
+
+label {
+  font-size: 2rem;
+  justify-self: center;
+}
+button {
+  background-color: rgb(18, 128, 18);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 4px;
+}
+
+input {
+  height: 30px;
+  font-size: 1rem;
+}

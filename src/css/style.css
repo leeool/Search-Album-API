@@ -1,0 +1,14 @@
+* {
+  list-style: none;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #212121;
+  color: white;
+}
+
+@import url(main.css);
+@import url(input.css);

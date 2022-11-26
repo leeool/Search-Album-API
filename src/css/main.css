@@ -1,0 +1,28 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  justify-items: center;
+  align-items: center;
+}
+
+img {
+  width: 300px;
+  border-radius: 4px;
+}
+
+.album-name {
+  font-size: 1.5rem;
+}
+
+.artist-name {
+  color: #999;
+}
+
+.tracks {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+
+.container-tracks {
+  width: 300px;
+}
