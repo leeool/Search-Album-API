@@ -3,7 +3,7 @@ import axios from "axios"
 const APIKey = "e47b8a8336f383a1f15857a5cac3a1cc"
 
 const getMBIDUrl = (inputValue) => {
-  return `http://ws.audioscrobbler.com/2.0/?method=album.search&album=${inputValue}&api_key=${APIKey}&format=json`
+  return `https://ws.audioscrobbler.com/2.0/?method=album.search&album=${inputValue}&api_key=${APIKey}&format=json`
 }
 
 const getDataUrl = (mbid) => {
