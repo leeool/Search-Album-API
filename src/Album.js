@@ -1,3 +1,11 @@
+import {
+  Card,
+  CardBody,
+  Heading,
+  ListItem,
+  OrderedList,
+  Stack
+} from "@chakra-ui/react"
 import React from "react"
 
 const Album = ({ imgSrc, albumName, artistName, trackList }) => {
@@ -5,7 +13,7 @@ const Album = ({ imgSrc, albumName, artistName, trackList }) => {
 
   if (trackList) {
     for (let i = 0; i < Object.keys(trackList).length; i++) {
-      tracksNames.push(trackList[i].name)
+      tracksNames.push(`${trackList[i].name}`)
     }
   }
 
@@ -17,19 +25,43 @@ const Album = ({ imgSrc, albumName, artistName, trackList }) => {
         gap: "12px"
       }}
     >
-      <div>
-        <img alt="aaaa" src={imgSrc || "./placeholder.svg"} />
-        <p className="album-name">{albumName || "..."}</p>
-        <p className="artist-name">{artistName || "..."}</p>
-      </div>
-      <div className="container-tracks">
-        <p className="tracks-title">Tracks</p>
-        {tracksNames.map((track) => (
-          <li style={{ fontSize: "1.4rem" }} key={track.slice(0, 5)}>
-            {track}
-          </li>
-        ))}
-      </div>
+      <Card size={"md"} bg="blackAlpha.300">
+        <CardBody>
+          <img alt="aaaa" src={imgSrc || "./placeholder.svg"} />
+          <Stack spacing="1px" mt="15px">
+            <Heading as="h1" size="xl" color="gray.50" className="album-name">
+              {albumName || "..."}
+            </Heading>
+            <Heading
+              as="h2"
+              size="md"
+              color="whiteAlpha.800"
+              className="artist-name"
+            >
+              {artistName || "..."}
+            </Heading>
+          </Stack>
+        </CardBody>
+      </Card>
+      <Card size="lg" bg="blackAlpha.300">
+        <CardBody>
+          <Heading size="xl" color="white">
+            Tracks
+          </Heading>
+          <OrderedList>
+            {tracksNames.map((track) => (
+              <ListItem
+                key={track.slice(0, 5)}
+                color="whiteAlpha.900"
+                fontSize="xl"
+                marginTop="8px"
+              >
+                {track}
+              </ListItem>
+            ))}
+          </OrderedList>
+        </CardBody>
+      </Card>
     </div>
   )
 }

@@ -1,12 +1,13 @@
+import { Box } from "@chakra-ui/react"
 import React from "react"
 import "./css/style.css"
-import Input from "./Input"
+import InputContainer from "./InputContainer"
 
 function App() {
   return (
-    <main className="container">
-      <Input />
-    </main>
+    <Box bg={"#222"} className="container">
+      <InputContainer />
+    </Box>
   )
 }
 

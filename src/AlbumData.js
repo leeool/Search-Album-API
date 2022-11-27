@@ -1,4 +1,3 @@
-// import Input from "./Input"
 import axios from "axios"
 const APIKey = "e47b8a8336f383a1f15857a5cac3a1cc"
 

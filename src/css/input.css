@@ -2,24 +2,10 @@ form {
   display: grid;
   height: 100vh;
   align-content: center;
-  gap: 12px;
 }
 
 label {
   font-size: 3rem;
   font-weight: 700;
   justify-self: center;
-}
-button {
-  background-color: rgb(18, 128, 18);
-  border: none;
-  color: white;
-  font-size: 2rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input {
-  height: 50px;
-  font-size: 1.5rem;
 }
