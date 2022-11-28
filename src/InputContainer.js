@@ -49,12 +49,14 @@ const InputContainer = () => {
                   children={<Search2Icon w={6} h={6} color="green.200" />}
                 />
                 <Input
-                  variant="filled"
+                  variant="outline"
                   type="text"
                   id="input"
                   size="lg"
                   placeholder="album..."
                   color="white"
+                  bg="blackAlpha.300"
+                  autoComplete="off"
                   onChange={({ target }) => {
                     return setInputValue(
                       target.value.split(" ").join("-").trim()
