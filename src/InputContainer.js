@@ -28,7 +28,7 @@ const InputContainer = () => {
     return `https://musicbrainz.org/ws/2/release/${id}?inc=recordings+artists&fmt=json`
   }
 
-  const getAlbumCover = (id) => `http://coverartarchive.org/release/${id}`
+  const getAlbumCover = (id) => `https://coverartarchive.org/release/${id}`
 
   const handleInput = ({ target }) => {
     setInput(target.value)
