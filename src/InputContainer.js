@@ -15,18 +15,20 @@ import { Search2Icon } from "@chakra-ui/icons"
 import axios from "axios"
 
 const InputContainer = () => {
-  const [input, setInput] = React.useState(null)
-  const [album, setAlbum] = React.useState(null)
-  const [nomeAlbum, setNomeAlbum] = React.useState("...")
-  const [nomeBanda, setNomeBanda] = React.useState("...")
+  const [input, setInput] = React.useState("")
+  const [album, setAlbum] = React.useState("")
+  const [cover, setCover] = React.useState("")
+  const [loading, setLoading] = React.useState(false)
 
-  const getArtistID = (inputValue) => {
-    return `https://musicbrainz.org/ws/2/artist?query=${inputValue}&limit=1&fmt=json`
+  const getAlbumID = (inputValue) => {
+    return `https://musicbrainz.org/ws/2/release?query=${inputValue}&limit=1&fmt=json`
   }
 
-  const getAlbuns = (id) => {
-    return `https://musicbrainz.org/ws/2/artist/${id}?inc=release-groups&fmt=json`
+  const getAlbumData = (id) => {
+    return `https://musicbrainz.org/ws/2/release/${id}?inc=recordings+artists&fmt=json`
   }
+
+  const getAlbumCover = (id) => `http://coverartarchive.org/release/${id}`
 
   const handleInput = ({ target }) => {
     setInput(target.value)
@@ -34,26 +36,30 @@ const InputContainer = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    setLoading(true)
+    const albumID = await axios
+      .get(getAlbumID(input))
+      .then((response) => response.data.releases[0])
 
-    await axios
-      .get(getArtistID(input))
-      .then((response) => {
-        const ID = response.data.artists[0].id
-        return axios.get(getAlbuns(ID))
-      })
-      .then((response) => setAlbum(response.data))
+    const albumData = await axios
+      .get(getAlbumData(albumID.id))
+      .then((response) => response.data)
+    console.log(albumData)
+
+    const albumCover = await axios
+      .get(getAlbumCover(albumData.id))
+      .then((response) => response.data)
+      .catch(() => setCover("./placeholder.svg"))
+
+    setCover(albumCover)
+    setAlbum(albumData)
+    setLoading(false)
   }
-
-  React.useEffect(() => {
-    if (!album) return
-    setNomeAlbum(album["release-groups"][0].title)
-    console.log(album)
-    setNomeBanda(album.name)
-  }, [album])
 
   return (
     <>
       <DarkMode>
+        {loading}
         <form onSubmit={handleSubmit}>
           <Stack spacing={4}>
             <FormControl>
@@ -73,6 +79,7 @@ const InputContainer = () => {
                   color="white"
                   bg="blackAlpha.300"
                   autoComplete="off"
+                  value={input}
                   onChange={handleInput}
                 />
               </InputGroup>
@@ -82,7 +89,13 @@ const InputContainer = () => {
             </Button>
           </Stack>
         </form>
-        <Album nomeAlbum={nomeAlbum} nomeBanda={nomeBanda} />
+        <Album
+          nomeAlbum={(album && album.title) || "..."}
+          nomeBanda={(album && album["artist-credit"][0].name) || "..."}
+          cover={(cover && cover.images[0].image) || "./placeholder.svg"}
+          tracks={(album && album.media[0].tracks) || []}
+          loading={loading}
+        />
       </DarkMode>
     </>
   )

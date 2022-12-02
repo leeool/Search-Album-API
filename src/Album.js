@@ -1,11 +1,15 @@
-import { Card, CardBody, Heading, OrderedList, Stack } from "@chakra-ui/react"
+import {
+  Card,
+  CardBody,
+  Heading,
+  OrderedList,
+  Stack,
+  ListItem,
+  Skeleton
+} from "@chakra-ui/react"
 import React from "react"
-import axios from "axios"
-import { GlobalContext } from "./GlobalContext"
 
-const Album = ({ nomeAlbum, nomeBanda, cover }) => {
-  const global = React.useContext(GlobalContext)
-
+const Album = ({ nomeAlbum, nomeBanda, cover, tracks, loading }) => {
   return (
     <div
       style={{
@@ -16,10 +20,28 @@ const Album = ({ nomeAlbum, nomeBanda, cover }) => {
     >
       <Card size={"md"} bg="blackAlpha.300">
         <CardBody>
-          <img alt="aaaa" src={"./placeholder.svg"} />
-          <Stack spacing="1px" mt="15px">
+          {loading ? (
+            <Skeleton
+              width="31.5rem"
+              height="31.5rem"
+              startColor="whiteAlpha.300"
+              endColor="whiteAlpha.400"
+            ></Skeleton>
+          ) : (
+            <img alt="" src={cover} />
+          )}
+          <Stack spacing="8px" mt="15px">
             <Heading as="h1" size="xl" color="gray.50" className="album-name">
-              {nomeAlbum}
+              {loading ? (
+                <Skeleton
+                  width="100%"
+                  height="3rem"
+                  startColor="whiteAlpha.300"
+                  endColor="whiteAlpha.400"
+                ></Skeleton>
+              ) : (
+                nomeAlbum
+              )}
             </Heading>
             <Heading
               as="h2"
@@ -27,7 +49,16 @@ const Album = ({ nomeAlbum, nomeBanda, cover }) => {
               color="whiteAlpha.800"
               className="artist-name"
             >
-              {nomeBanda}
+              {loading ? (
+                <Skeleton
+                  width="100%"
+                  height="2rem"
+                  startColor="whiteAlpha.300"
+                  endColor="whiteAlpha.400"
+                ></Skeleton>
+              ) : (
+                nomeBanda
+              )}
             </Heading>
           </Stack>
         </CardBody>
@@ -37,7 +68,29 @@ const Album = ({ nomeAlbum, nomeBanda, cover }) => {
           <Heading size="xl" color="white">
             Tracks
           </Heading>
-          <OrderedList></OrderedList>
+          {loading ? (
+            <Skeleton
+              width="100%"
+              height="30rem"
+              startColor="whiteAlpha.300"
+              endColor="whiteAlpha.400"
+            ></Skeleton>
+          ) : (
+            <OrderedList>
+              {tracks.map(({ title }) => {
+                return (
+                  <ListItem
+                    key={title}
+                    color="whiteAlpha.900"
+                    fontSize="xl"
+                    marginTop="8px"
+                  >
+                    {title}
+                  </ListItem>
+                )
+              })}
+            </OrderedList>
+          )}
         </CardBody>
       </Card>
     </div>
