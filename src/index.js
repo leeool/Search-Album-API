@@ -2,7 +2,6 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import { ChakraProvider, ColorModeScript, DarkMode } from "@chakra-ui/react"
 import App from "./App"
-import theme from "./Theme"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(

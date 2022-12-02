@@ -1,21 +1,10 @@
-import {
-  Card,
-  CardBody,
-  Heading,
-  ListItem,
-  OrderedList,
-  Stack
-} from "@chakra-ui/react"
+import { Card, CardBody, Heading, OrderedList, Stack } from "@chakra-ui/react"
 import React from "react"
+import axios from "axios"
+import { GlobalContext } from "./GlobalContext"
 
-const Album = ({ imgSrc, albumName, artistName, trackList }) => {
-  const tracksNames = []
-
-  if (trackList) {
-    for (let i = 0; i < Object.keys(trackList).length; i++) {
-      tracksNames.push(`${trackList[i].name}`)
-    }
-  }
+const Album = ({ nomeAlbum, nomeBanda, cover }) => {
+  const global = React.useContext(GlobalContext)
 
   return (
     <div
@@ -27,10 +16,10 @@ const Album = ({ imgSrc, albumName, artistName, trackList }) => {
     >
       <Card size={"md"} bg="blackAlpha.300">
         <CardBody>
-          <img alt="aaaa" src={imgSrc || "./placeholder.svg"} />
+          <img alt="aaaa" src={"./placeholder.svg"} />
           <Stack spacing="1px" mt="15px">
             <Heading as="h1" size="xl" color="gray.50" className="album-name">
-              {albumName || "..."}
+              {nomeAlbum}
             </Heading>
             <Heading
               as="h2"
@@ -38,7 +27,7 @@ const Album = ({ imgSrc, albumName, artistName, trackList }) => {
               color="whiteAlpha.800"
               className="artist-name"
             >
-              {artistName || "..."}
+              {nomeBanda}
             </Heading>
           </Stack>
         </CardBody>
@@ -48,18 +37,7 @@ const Album = ({ imgSrc, albumName, artistName, trackList }) => {
           <Heading size="xl" color="white">
             Tracks
           </Heading>
-          <OrderedList>
-            {tracksNames.map((track) => (
-              <ListItem
-                key={track.slice(0, 5)}
-                color="whiteAlpha.900"
-                fontSize="xl"
-                marginTop="8px"
-              >
-                {track}
-              </ListItem>
-            ))}
-          </OrderedList>
+          <OrderedList></OrderedList>
         </CardBody>
       </Card>
     </div>

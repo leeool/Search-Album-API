@@ -1,6 +1,5 @@
 import React from "react"
 import Album from "./Album"
-import { getApiMBID, getAlbumData } from "./AlbumData"
 import {
   Button,
   DarkMode,
@@ -13,27 +12,44 @@ import {
 } from "@chakra-ui/react"
 
 import { Search2Icon } from "@chakra-ui/icons"
+import axios from "axios"
 
 const InputContainer = () => {
-  const [inputValue, setInputValue] = React.useState("")
+  const [input, setInput] = React.useState(null)
+  const [album, setAlbum] = React.useState(null)
+  const [nomeAlbum, setNomeAlbum] = React.useState("...")
+  const [nomeBanda, setNomeBanda] = React.useState("...")
 
-  const [imgSrc, setImageSrc] = React.useState("")
-  const [albumName, setAlbumName] = React.useState("")
-  const [artistName, setArtistName] = React.useState("")
-  const [trackList, setTracks] = React.useState("")
+  const getArtistID = (inputValue) => {
+    return `https://musicbrainz.org/ws/2/artist?query=${inputValue}&limit=1&fmt=json`
+  }
+
+  const getAlbuns = (id) => {
+    return `https://musicbrainz.org/ws/2/artist/${id}?inc=release-groups&fmt=json`
+  }
+
+  const handleInput = ({ target }) => {
+    setInput(target.value)
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    if (!inputValue) return
-    const MBID = await getApiMBID(inputValue)
-    console.log("🚀 => handleSubmit => getApiMBID", getApiMBID)
-    const { artist, image, name, tracks } = await getAlbumData(MBID)
 
-    setImageSrc(image[5]["#text"])
-    setAlbumName(name)
-    setArtistName(artist)
-    setTracks(tracks.track)
+    await axios
+      .get(getArtistID(input))
+      .then((response) => {
+        const ID = response.data.artists[0].id
+        return axios.get(getAlbuns(ID))
+      })
+      .then((response) => setAlbum(response.data))
   }
+
+  React.useEffect(() => {
+    if (!album) return
+    setNomeAlbum(album["release-groups"][0].title)
+    console.log(album)
+    setNomeBanda(album.name)
+  }, [album])
 
   return (
     <>
@@ -57,11 +73,7 @@ const InputContainer = () => {
                   color="white"
                   bg="blackAlpha.300"
                   autoComplete="off"
-                  onChange={({ target }) => {
-                    return setInputValue(
-                      target.value.split(" ").join("-").trim()
-                    )
-                  }}
+                  onChange={handleInput}
                 />
               </InputGroup>
             </FormControl>
@@ -70,12 +82,7 @@ const InputContainer = () => {
             </Button>
           </Stack>
         </form>
-        <Album
-          imgSrc={imgSrc}
-          albumName={albumName}
-          artistName={artistName}
-          trackList={trackList}
-        />
+        <Album nomeAlbum={nomeAlbum} nomeBanda={nomeBanda} />
       </DarkMode>
     </>
   )
