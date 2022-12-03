@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react"
 import React from "react"
 import "./css/style.css"
-import InputContainer from "./InputContainer"
+import InputContainer from "./Input"
 
 function App() {
   return (

@@ -24,8 +24,8 @@ const Album = ({ nomeAlbum, nomeBanda, cover, tracks, loading }) => {
             <Skeleton
               width="31.5rem"
               height="31.5rem"
-              startColor="whiteAlpha.300"
-              endColor="whiteAlpha.400"
+              startColor="whiteAlpha.200"
+              endColor="whiteAlpha.300"
             ></Skeleton>
           ) : (
             <img alt="" src={cover} />
@@ -36,8 +36,8 @@ const Album = ({ nomeAlbum, nomeBanda, cover, tracks, loading }) => {
                 <Skeleton
                   width="100%"
                   height="3rem"
-                  startColor="whiteAlpha.300"
-                  endColor="whiteAlpha.400"
+                  startColor="whiteAlpha.200"
+                  endColor="whiteAlpha.300"
                 ></Skeleton>
               ) : (
                 nomeAlbum
@@ -53,8 +53,8 @@ const Album = ({ nomeAlbum, nomeBanda, cover, tracks, loading }) => {
                 <Skeleton
                   width="100%"
                   height="2rem"
-                  startColor="whiteAlpha.300"
-                  endColor="whiteAlpha.400"
+                  startColor="whiteAlpha.200"
+                  endColor="whiteAlpha.300"
                 ></Skeleton>
               ) : (
                 nomeBanda
@@ -72,8 +72,8 @@ const Album = ({ nomeAlbum, nomeBanda, cover, tracks, loading }) => {
             <Skeleton
               width="100%"
               height="30rem"
-              startColor="whiteAlpha.300"
-              endColor="whiteAlpha.400"
+              startColor="whiteAlpha.200"
+              endColor="whiteAlpha.300"
             ></Skeleton>
           ) : (
             <OrderedList>

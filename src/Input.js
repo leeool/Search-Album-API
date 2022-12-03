@@ -1,5 +1,5 @@
 import React from "react"
-import Album from "./Album"
+import Album from "./AlbumContainer"
 import {
   Button,
   DarkMode,
@@ -10,7 +10,6 @@ import {
   InputLeftElement,
   Stack
 } from "@chakra-ui/react"
-
 import { Search2Icon } from "@chakra-ui/icons"
 import axios from "axios"
 
@@ -20,13 +19,11 @@ const InputContainer = () => {
   const [cover, setCover] = React.useState("")
   const [loading, setLoading] = React.useState(false)
 
-  const getAlbumID = (inputValue) => {
-    return `https://musicbrainz.org/ws/2/release?query=${inputValue}&limit=1&fmt=json`
-  }
+  const getAlbumID = (inputValue) =>
+    `https://musicbrainz.org/ws/2/release?query=${inputValue}&limit=1&fmt=json`
 
-  const getAlbumData = (id) => {
-    return `https://musicbrainz.org/ws/2/release/${id}?inc=recordings+artists&fmt=json`
-  }
+  const getAlbumData = (id) =>
+    `https://musicbrainz.org/ws/2/release/${id}?inc=recordings+artists&fmt=json`
 
   const getAlbumCover = (id) => `https://coverartarchive.org/release/${id}`
 
@@ -51,6 +48,7 @@ const InputContainer = () => {
       .then((response) => response.data)
       .catch(() => setCover("./placeholder.svg"))
 
+    setInput("")
     setCover(albumCover)
     setAlbum(albumData)
     setLoading(false)
@@ -59,7 +57,6 @@ const InputContainer = () => {
   return (
     <>
       <DarkMode>
-        {loading}
         <form onSubmit={handleSubmit}>
           <Stack spacing={4}>
             <FormControl>
@@ -79,6 +76,7 @@ const InputContainer = () => {
                   color="white"
                   bg="blackAlpha.300"
                   autoComplete="off"
+                  autoFocus
                   value={input}
                   onChange={handleInput}
                 />
