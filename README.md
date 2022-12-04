@@ -1,17 +1,21 @@
 # Search album
 
-## LastFM API
+Search an album name
 
-- show album cover
-- show album name (with auto-correct)
-- show release date
-- show tracks
+## Music Brainz API
 
-## Process
+[Wiki Music Brainz](https://wiki.musicbrainz.org/MusicBrainz_API)
 
-1. Request with search album name end point
-2. Get MBID from album
-3. Get album info with MBID from another end point
+## Features
+
+- Show album cover
+- Show album name
+- Show release date
+- Show tracks
+
+## Chakra UI
+
+Was used the interface library of [Chakra UI](https://chakra-ui.com/) for ReactJS
 
 ## Demo
 
