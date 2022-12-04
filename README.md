@@ -1,6 +1,6 @@
 # Search album
 
-Search an album name
+[Search an album name](https://search-album-leeool.netlify.app/)
 
 ## Music Brainz API
 
